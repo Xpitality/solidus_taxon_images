@@ -1,0 +1,15 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Taxon), spree.admin_taxons_path) %>
+<% admin_breadcrumb(link_to @taxon.name, spree.admin_taxon_path(@taxon)) %>
+
+<% content_for :tabs do %>
+  <nav>
+    <ul class="tabs" data-hook="admin_taxons_tabs">
+      <%= content_tag :li, class: ('active' if current == 'Taxon Details') do %>
+        <%= link_to t('spree.taxon_details'), spree.edit_admin_taxonomy_taxon_url(@taxon.taxonomy_id, @taxon.id) %>
+      <% end if can?(:admin, Spree::Taxon) %>
+      <%= content_tag :li, class: ('active' if current == 'Images') do %>
+        <%= link_to t('spree.images'), spree.admin_taxon_images_url(@taxon.id) %>
+      <% end if can?(:admin, Spree::Image)  %>
+    </ul>
+  </nav>
+<% end %>

@@ -1,0 +1,19 @@
+var $uploadEl = $('[data-upload-id="<%= params[:upload_id] %>"]');
+
+<% if @image.persisted? %>
+
+  $uploadEl.trigger('clear');
+
+  <% if @product %>
+    Spree.Views.Tables.EditableTable.append('<%= j render "spree/admin/images/product/image_row", image: @image %>');
+  <% elsif @taxon %>
+    Spree.Views.Tables.EditableTable.append('<%= j render "spree/admin/images/taxon/image_row", image: @image %>');
+  <% end %>
+
+
+
+<% else %>
+
+  $uploadEl.find('error').removeClass('hidden').html('<%= j @image.errors.full_messages.join("<br>").html_safe %>');
+
+<% end %>

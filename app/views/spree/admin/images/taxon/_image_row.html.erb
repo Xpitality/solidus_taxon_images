@@ -1,0 +1,44 @@
+<tr id="<%= spree_dom_id image %>" data-hook="images_row">
+
+  <td>
+    <% if can?(:update_positions, Spree::Image) %>
+      <span class="handle"></span>
+    <% end %>
+  </td>
+
+  <td>
+    <span class="modal-image-trigger" data-toggle="modal" data-target="#modal-image-<%= image.id %>">
+      <%= render 'spree/admin/shared/image', image: image, size: :mini %>
+    </span>
+    <%= render(
+      "spree/admin/shared/modal",
+      target: "modal-image-#{image.id}",
+      title: image.alt,
+      content: %{
+        <div class='align-center'>
+          #{image_tag(image.url(:large))}
+        </div>
+      }.html_safe
+    ) %>
+  </td>
+
+  <td>
+    <%= fields_for image do |f| %>
+      <%= f.text_field :alt %>
+    <% end %>
+  </td>
+
+  <td class="actions">
+    <% if can?(:update, image) %>
+      <%= link_to_with_icon 'check', t('spree.actions.save'), api_taxon_image_path(@taxon.id, image), no_text: true, data: {action: 'save'} %>
+
+      <%= link_to_with_icon 'cancel', t('spree.actions.cancel'), nil, no_text: true, data: {action: 'cancel'} %>
+
+      <%= link_to_with_icon 'edit', t('spree.actions.edit'), edit_admin_taxon_image_path(@taxon.id, image), no_text: true, data: {action: 'edit'} %>
+    <% end %>
+
+    <% if can?(:destroy, image) %>
+      <%= link_to_delete image, { url: admin_taxon_image_url(@taxon.id, image), no_text: true } %>
+    <% end %>
+  </td>
+</tr>

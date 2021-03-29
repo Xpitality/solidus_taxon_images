@@ -1,0 +1,12 @@
+<%= form_for [:admin, taxon, image], url: admin_taxon_images_path(taxon, image), html: { multipart: true } do |f| %>
+  <fieldset data-hook="new_image">
+    <legend align="center"><%= t('spree.new_image') %></legend>
+
+      <%= render partial: 'spree/admin/images/taxon/form', locals: { f: f } %>
+
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= button_tag t('spree.actions.update'), class: 'btn btn-primary' %>
+        <%= link_to t('spree.actions.cancel'), admin_taxon_images_url(@taxon), id: 'cancel_link', class: 'button' %>
+      </div>
+  </fieldset>
+<% end %>
