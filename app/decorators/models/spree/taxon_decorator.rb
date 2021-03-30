@@ -1,5 +1,5 @@
 Spree::Taxon.class_eval do
-  has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::TaxonImage"
+  has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "::Spree::TaxonImage"
 
   # # Image that can be used for the variant.
   # #
