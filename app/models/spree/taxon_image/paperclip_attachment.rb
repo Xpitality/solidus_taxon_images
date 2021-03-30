@@ -7,7 +7,7 @@ module Spree::TaxonImage::PaperclipAttachment
     validate :no_attachment_errors
 
     has_attached_file :attachment,
-                      styles: { small: '690x388>', large: '1076x604>' },
+                      styles: { mini: '48x48>', small: '690x388>', large: '1076x604>' },
                       default_style: :small,
                       default_url: 'noimage/:style.png',
                       url: '/spree/taxons/:id/:style/:basename.:extension',
